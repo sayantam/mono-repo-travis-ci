@@ -1,6 +1,4 @@
 # Travis Configuration
-langurage: generic
-
 stages:
   - name: test
     if: branch != master
@@ -96,9 +94,9 @@ jobs:
       script:
         - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
 
-      - stage: publish
-        name: "nodejs-project publish"
-        language: node_js
-        node_js: lts/dubnium
-        script:
-          - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+    - stage: publish
+      name: "nodejs-project publish"
+      language: node_js
+      node_js: lts/dubnium
+      script:
+        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
