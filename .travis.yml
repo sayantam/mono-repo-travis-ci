@@ -17,6 +17,8 @@ jobs:
       name: "ruby-project test"
       language: ruby
       rvm: 2.5
+      install:
+        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && bundle install; fi
       script:
         - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake; fi
 
@@ -62,6 +64,8 @@ jobs:
       name: "ruby-project integration"
       language: ruby
       rvm: 2.5
+      install:
+        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && bundle install; fi
       script:
         - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake integration; fi
 
