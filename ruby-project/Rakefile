@@ -1,0 +1,16 @@
+desc "Run unit tests"
+task :spec do
+  puts "Running ruby-project tests... [OK]"
+end
+
+desc "Run integration tests"
+task :integration do
+  puts "Running ruby-project integration... [OK]"
+end
+
+desc "Publish gem"
+task :publish do
+  puts "Running ruby-project publish... [OK]"
+end
+
+task :default => :spec
