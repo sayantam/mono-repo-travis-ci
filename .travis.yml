@@ -18,89 +18,90 @@ jobs:
       language: ruby
       rvm: 2.5
       install:
+        - echo $TRAVIS_COMMIT_RANGE
         - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && bundle install; fi
       script:
         - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake; fi
 
-    - stage: test
-      name: "java-project test"
-      language: java
-      jdk: openjdk8
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+    # - stage: test
+    #   name: "java-project test"
+    #   language: java
+    #   jdk: openjdk8
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
 
-    - stage: test
-      name: "nodejs-project test"
-      language: node_js
-      node_js: lts/dubnium
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
-
-
-    - stage: build
-      name: "nodejs-project build"
-      language: node_js
-      node_js: lts/dubnium
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+    # - stage: test
+    #   name: "nodejs-project test"
+    #   language: node_js
+    #   node_js: lts/dubnium
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
 
 
-    - stage: package
-      name: "java-project package"
-      language: java
-      jdk: openjdk8
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
-
-    - stage: integration
-      name: "nodejs-project package"
-      language: node_js
-      node_js: lts/dubnium
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+    # - stage: build
+    #   name: "nodejs-project build"
+    #   language: node_js
+    #   node_js: lts/dubnium
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
 
 
-    - stage: integration
-      name: "ruby-project integration"
-      language: ruby
-      rvm: 2.5
-      install:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && bundle install; fi
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake integration; fi
+    # - stage: package
+    #   name: "java-project package"
+    #   language: java
+    #   jdk: openjdk8
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
 
-    - stage: integration
-      name: "java-project integration"
-      language: java
-      jdk: openjdk8
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
-
-    - stage: integration
-      name: "nodejs-project integration"
-      language: node_js
-      node_js: lts/dubnium
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+    # - stage: integration
+    #   name: "nodejs-project package"
+    #   language: node_js
+    #   node_js: lts/dubnium
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
 
 
-    - stage: publish
-      name: "ruby-project publish"
-      language: ruby
-      rvm: 2.5
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake publish; fi
+    # - stage: integration
+    #   name: "ruby-project integration"
+    #   language: ruby
+    #   rvm: 2.5
+    #   install:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && bundle install; fi
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake integration; fi
 
-    - stage: publish
-      name: "java-project publish"
-      language: java
-      jdk: openjdk8
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+    # - stage: integration
+    #   name: "java-project integration"
+    #   language: java
+    #   jdk: openjdk8
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
 
-    - stage: publish
-      name: "nodejs-project publish"
-      language: node_js
-      node_js: lts/dubnium
-      script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+    # - stage: integration
+    #   name: "nodejs-project integration"
+    #   language: node_js
+    #   node_js: lts/dubnium
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+
+
+    # - stage: publish
+    #   name: "ruby-project publish"
+    #   language: ruby
+    #   rvm: 2.5
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake publish; fi
+
+    # - stage: publish
+    #   name: "java-project publish"
+    #   language: java
+    #   jdk: openjdk8
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+
+    # - stage: publish
+    #   name: "nodejs-project publish"
+    #   language: node_js
+    #   node_js: lts/dubnium
+    #   script:
+    #     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
