@@ -18,6 +18,7 @@ jobs:
       language: ruby
       rvm: 2.5
       install:
+        - git diff --name-only $TRAVIS_COMMIT_RANGE | sort -u | uniq
         - echo $TRAVIS_COMMIT_RANGE
         - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && bundle install; fi
       script:
