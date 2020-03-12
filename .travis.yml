@@ -1,5 +1,5 @@
 # Travis Configuration
-
+langurage: generic
 
 stages:
   - name: test
