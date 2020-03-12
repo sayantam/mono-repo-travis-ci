@@ -1,9 +1,8 @@
+CHANGES = ${TRAVIS_BUILD_DIR}/.travis/build-condition.sh
+RUBY_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/ruby-project
+
 ruby_install:
-	if ${TRAVIS_BUILD_DIR}/.travis/build-condition.sh ${TRAVIS_COMMIT_RANGE} ruby-project; then \
-	  cd ${TRAVIS_BUILD_DIR}/ruby-project && bundle install \
-	fi
+	if ${CHANGES} ${TRAVIS_COMMIT_RANGE} ruby-project; then cd ${RUBY_PROJECT_PATH} && bundle install; fi
 
 ruby_test:
-	if ${TRAVIS_BUILD_DIR}/.travis/build-condition.sh ${TRAVIS_COMMIT_RANGE} ruby-project; then \
-	  cd ${TRAVIS_BUILD_DIR}/ruby-project && rake \
-	fi
+	if ${CHANGES} ${TRAVIS_COMMIT_RANGE} ruby-project; then cd ${RUBY_PROJECT_PATH} && rake; fi
