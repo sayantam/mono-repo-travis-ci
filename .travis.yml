@@ -1,15 +1,15 @@
 # Travis Configuration
 stages:
   - name: test
-    if: branch != master
+    if: branch != master AND (NOT(branch = develop AND type = push))
   - name: build
-    if: branch IN (master, develop)
+    if: branch = master AND type != push
   - name: package
-    if: branch IN (master, develop)
+    if: branch = master AND type != push
   - name: integration
-    if: branch IN (master, develop)
+    if: branch = master AND type != push
   - name: publish
-    if: branch IN (master, develop)
+    if: branch = master AND type = push
 
 jobs:
   include:
