@@ -3,13 +3,13 @@ stages:
   - name: test
     if: branch != master
   - name: build
-    if: branch = master
+    if: branch IN (master, develop)
   - name: package
-    if: branch = master
+    if: branch IN (master, develop)
   - name: integration
-    if: branch = master
+    if: branch IN (master, develop)
   - name: publish
-    if: branch = master
+    if: branch IN (master, develop)
 
 jobs:
   include:
@@ -17,86 +17,110 @@ jobs:
       name: "ruby-project test"
       language: ruby
       rvm: 2.5
+      install:
+        - make PROJECT=ruby install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake; fi
+        - make PROJECT=ruby test
 
     - stage: test
       name: "java-project test"
       language: java
       jdk: openjdk8
+      install:
+        - make PROJECT=java install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+        - make PROJECT=java test
 
     - stage: test
       name: "nodejs-project test"
       language: node_js
       node_js: lts/dubnium
+      install:
+        - make PROJECT=nodejs install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+        - make PROJECT=nodejs test
 
 
     - stage: build
       name: "nodejs-project build"
       language: node_js
       node_js: lts/dubnium
+      install:
+        - make PROJECT=nodejs install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+        - make PROJECT=nodejs build
 
 
     - stage: package
       name: "java-project package"
       language: java
       jdk: openjdk8
+      install:
+        - make PROJECT=java install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+        - make PROJECT=java package
 
-    - stage: integration
+    - stage: package
       name: "nodejs-project package"
       language: node_js
       node_js: lts/dubnium
+      install:
+        - make PROJECT=nodejs install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+        - make PROJECT=nodejs package
 
 
     - stage: integration
       name: "ruby-project integration"
       language: ruby
       rvm: 2.5
+      install:
+        - make PROJECT=ruby install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake integration; fi
+        - make PROJECT=ruby integration
 
     - stage: integration
       name: "java-project integration"
       language: java
       jdk: openjdk8
+      install:
+        - make PROJECT=java install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+        - make PROJECT=java integration
 
     - stage: integration
       name: "nodejs-project integration"
       language: node_js
       node_js: lts/dubnium
+      install:
+        - make PROJECT=nodejs install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+        - make PROJECT=nodejs integration
 
 
     - stage: publish
       name: "ruby-project publish"
       language: ruby
       rvm: 2.5
+      install:
+        - make PROJECT=ruby install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd ruby-project && rake publish; fi
+        - make PROJECT=ruby publish
 
     - stage: publish
       name: "java-project publish"
       language: java
       jdk: openjdk8
+      install:
+        - make PROJECT=java install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd java-project && ./gradlew; fi
+        - make PROJECT=java publish
 
     - stage: publish
       name: "nodejs-project publish"
       language: node_js
       node_js: lts/dubnium
+      install:
+        - make PROJECT=nodejs install
       script:
-        - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE ruby-project; then cd nodejs-project && npm start; fi
+        - make PROJECT=nodejs publish
