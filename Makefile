@@ -3,47 +3,35 @@ RUBY_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/ruby-project
 JAVA_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/java-project
 NODEJS_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/nodejs-project
 
-ruby_install:
-	if ${CHANGES} ruby-project; then cd ${RUBY_PROJECT_PATH} && make install; fi
+ifeq ($(PROJECT), ruby)
+PROJECT_NAME = ruby-project
+PROJECT_PATH = ${TRAVIS_BUILD_DIR}/${PROJECT_NAME}
+endif
 
-ruby_test:
-	if ${CHANGES} ruby-project; then cd ${RUBY_PROJECT_PATH} && make test; fi
+ifeq ($(PROJECT), java)
+PROJECT_NAME = java-project
+PROJECT_PATH = ${TRAVIS_BUILD_DIR}/${PROJECT_NAME}
+endif
 
-ruby_integration:
-	if ${CHANGES} ruby-project; then cd ${RUBY_PROJECT_PATH} && make integration; fi
+ifeq ($(PROJECT), nodejs)
+PROJECT_NAME = nodejs-project
+PROJECT_PATH = ${TRAVIS_BUILD_DIR}/${PROJECT_NAME}
+endif
 
-ruby_publish:
-	if ${CHANGES} ruby-project; then cd ${RUBY_PROJECT_PATH} && make publish; fi
+install:
+	if ${CHANGES} ${PROJECT}; then cd ${PROJECT_PATH} && make install; fi
 
-java_install:
-	if ${CHANGES} java-project; then cd ${JAVA_PROJECT_PATH} && ./gradlew; fi
+test:
+	if ${CHANGES} ${PROJECT}; then cd ${PROJECT_PATH} && make test; fi
 
-java_test:
-	if ${CHANGES} java-project; then cd ${JAVA_PROJECT_PATH} && ./gradlew; fi
+integration:
+	if ${CHANGES} ${PROJECT}; then cd ${PROJECT_PATH} && make integration; fi
 
-java_package:
-	if ${CHANGES} java-project; then cd ${JAVA_PROJECT_PATH} && ./gradlew; fi
+publish:
+	if ${CHANGES} ${PROJECT}; then cd ${PROJECT_PATH} && make publish; fi
 
-java_integration:
-	if ${CHANGES} java-project; then cd ${JAVA_PROJECT_PATH} && ./gradlew; fi
+package:
+	if ${CHANGES} ${PROJECT}; then cd ${PROJECT_PATH} && make package; fi
 
-java_publish:
-	if ${CHANGES} java-project; then cd ${JAVA_PROJECT_PATH} && ./gradlew; fi
-
-nodejs_install:
-	if ${CHANGES} nodejs-project; then cd ${NODEJS_PROJECT_PATH} && npm start; fi
-
-nodejs_test:
-	if ${CHANGES} nodejs-project; then cd ${NODEJS_PROJECT_PATH} && npm start; fi
-
-nodejs_build:
-	if ${CHANGES} nodejs-project; then cd ${NODEJS_PROJECT_PATH} && npm start; fi
-
-nodejs_package:
-	if ${CHANGES} nodejs-project; then cd ${NODEJS_PROJECT_PATH} && npm start; fi
-
-nodejs_integration:
-	if ${CHANGES} nodejs-project; then cd ${NODEJS_PROJECT_PATH} && npm start; fi
-
-nodejs_publish:
-	if ${CHANGES} nodejs-project; then cd ${NODEJS_PROJECT_PATH} && npm start; fi
+build:
+	if ${CHANGES} ${PROJECT}; then cd ${PROJECT_PATH} && make build; fi
