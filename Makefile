@@ -1,7 +1,4 @@
 CHANGES = ${TRAVIS_BUILD_DIR}/.travis/build-condition.sh ${TRAVIS_COMMIT_RANGE}
-RUBY_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/ruby-project
-JAVA_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/java-project
-NODEJS_PROJECT_PATH = ${TRAVIS_BUILD_DIR}/nodejs-project
 
 ifeq ($(PROJECT), ruby)
 PROJECT_NAME = ruby-project
