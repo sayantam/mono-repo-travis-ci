@@ -18,27 +18,27 @@ jobs:
       language: ruby
       rvm: 2.5
       install:
-        - make ruby_install
+        - make PROJECT=ruby install
       script:
-        - make ruby_test
+        - make PROJECT=ruby test
 
     - stage: test
       name: "java-project test"
       language: java
       jdk: openjdk8
       install:
-        - make java_install
+        - make PROJECT=java install
       script:
-        - make java_test
+        - make PROJECT=java test
 
     - stage: test
       name: "nodejs-project test"
       language: node_js
       node_js: lts/dubnium
       install:
-        - make nodejs_install
+        - make PROJECT=nodejs install
       script:
-        - make nodejs_test
+        - make PROJECT=nodejs test
 
 
     - stage: build
@@ -46,9 +46,9 @@ jobs:
       language: node_js
       node_js: lts/dubnium
       install:
-        - make nodejs_install
+        - make PROJECT=nodejs install
       script:
-        - make nodejs_build
+        - make PROJECT=nodejs build
 
 
     - stage: package
@@ -56,18 +56,18 @@ jobs:
       language: java
       jdk: openjdk8
       install:
-        - make java_install
+        - make PROJECT=java install
       script:
-        - make java_package
+        - make PROJECT=java package
 
     - stage: package
       name: "nodejs-project package"
       language: node_js
       node_js: lts/dubnium
       install:
-        - make nodejs_install
+        - make PROJECT=nodejs install
       script:
-        - make nodejs_package
+        - make PROJECT=nodejs package
 
 
     - stage: integration
@@ -75,27 +75,27 @@ jobs:
       language: ruby
       rvm: 2.5
       install:
-        - make ruby_install
+        - make PROJECT=ruby install
       script:
-        - make ruby_integration
+        - make PROJECT=ruby integration
 
     - stage: integration
       name: "java-project integration"
       language: java
       jdk: openjdk8
       install:
-        - make java_install
+        - make PROJECT=java install
       script:
-        - make java_integration
+        - make PROJECT=java integration
 
     - stage: integration
       name: "nodejs-project integration"
       language: node_js
       node_js: lts/dubnium
       install:
-        - make nodejs_install
+        - make PROJECT=nodejs install
       script:
-        - make nodejs_integration
+        - make PROJECT=nodejs integration
 
 
     - stage: publish
@@ -103,24 +103,24 @@ jobs:
       language: ruby
       rvm: 2.5
       install:
-        - make ruby_install
+        - make PROJECT=ruby install
       script:
-        - make ruby_publish
+        - make PROJECT=ruby publish
 
     - stage: publish
       name: "java-project publish"
       language: java
       jdk: openjdk8
       install:
-        - make java_install
+        - make PROJECT=java install
       script:
-        - make java_publish
+        - make PROJECT=java publish
 
     - stage: publish
       name: "nodejs-project publish"
       language: node_js
       node_js: lts/dubnium
       install:
-        - make nodejs_install
+        - make PROJECT=nodejs install
       script:
-        - make nodejs_publish
+        - make PROJECT=nodejs publish
